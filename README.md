@@ -3,43 +3,52 @@
 
 ## 🛒 **README – Fawry Rise Journey Internship Challenge**
 
-```markdown
 # Fawry Rise Journey – Full Stack Development Internship Challenge
 
-This project simulates a **lightweight e-commerce system** that covers key features of product management, cart operations, shipping logic, and checkout processing. It's built to showcase clean OOP design, practical logic flow, and extensibility.
+This project simulates a **lightweight e-commerce system** that covers essential features such as product definition, cart operations, checkout processing, and shipping service integration. It demonstrates robust object-oriented design in Java.
 
 ---
 
 ## 💡 Features
 
 ### ✅ Products
-- Each product has:
-  - `name`
-  - `price`
-  - `available quantity`
-- Product types:
-  - **Perishable** (e.g. Cheese, Biscuits) – may expire.
-  - **Non-Perishable** (e.g. TV, Mobile).
-  - **Shippable** (e.g. TV, Cheese) – has a `weight`.
-  - **Non-Shippable** (e.g. Mobile scratch cards).
+Each product contains:
+- `name`
+- `price`
+- `quantity`
+
+Product behaviors:
+- Some products may **expire** (e.g. Cheese, Biscuits)
+- Some products are **non-expiring** (e.g. TV, Mobile)
+- Some products require **shipping** (e.g. Cheese, TV)
+- Others don’t (e.g. Mobile Scratch Cards)
+
+Shippable products have a **weight**.
+
+---
 
 ### ✅ Cart
-- Customers can add products to the cart with specified quantity.
-- Quantity cannot exceed available stock.
+- Customers can add products to the cart in a specified quantity.
+- Quantity cannot exceed the available product quantity.
+
+---
 
 ### ✅ Checkout
-- Verifies:
-  - Cart is not empty.
-  - No expired products.
-  - Sufficient customer balance.
-  - No out-of-stock items.
-- Prints:
-  - Item list with prices
-  - Subtotal
-  - Shipping cost
-  - Total amount paid
-  - Remaining customer balance
-- Sends shippable items to `ShippingService`.
+When a customer checks out:
+- The system validates:
+  - The cart is not empty.
+  - None of the items are expired.
+  - Customer has enough balance.
+  - No item is out of stock.
+
+- The system prints:
+  - Line item details
+  - Order subtotal
+  - Shipping cost (calculated from shippable items)
+  - Total amount
+  - Customer's remaining balance
+
+- Shippable items are collected and sent to `ShippingService`.
 
 ---
 
@@ -50,7 +59,7 @@ public interface Shippable {
     String getName();
     double getWeight();
 }
-
+```
 ---
 
 ## 🧪 Example Use Cases
@@ -69,4 +78,24 @@ cart.add(biscuits, 1);
 cart.add(scratchCard, 1);
 
 checkout(customer, cart);
+```
 
+---
+
+## 🖨️ Sample Console Output
+
+```yaml
+** Shipment notice **
+2x Cheese 400g
+1x Biscuits 700g
+Total package weight 1.1kg
+
+** Checkout receipt **
+2x Cheese 200
+1x Biscuits 150
+1x Recharge Card 50
+----------------------
+Subtotal: 400
+Shipping: 30
+Amount: 430
+Customer's current balance: 70
